@@ -3,5 +3,8 @@
     "env": {
       "HUGO_VERSION": "0.148.2"
     }
-  }
+  },
+  "buildCommand": "hugo --gc",
+  "outputDirectory": "public",
+  "framework": "hugo"
 }
