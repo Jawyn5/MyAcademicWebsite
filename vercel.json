@@ -6,15 +6,5 @@
   },
   "buildCommand": "hugo --gc",
   "outputDirectory": "public",
-  "framework": "hugo",
-  "rewrites": [
-    {
-      "source": "/posts/:slug",
-      "destination": "/posts/:slug/index.html"
-    },
-    {
-      "source": "/posts/:slug/",
-      "destination": "/posts/:slug/index.html"
-    }
-  ]
+  "framework": "hugo"
 }
