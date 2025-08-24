@@ -1,8 +1,8 @@
 # If your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would
 # contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 baseURL: ""
-title: PaperMod - Customizing
-copyright: "© [PaperMod Contributors](https://github.com/adityatelange/hugo-PaperMod/graphs/contributors)"
+title: initJiaw.log
+copyright: "© 2025 Jiawen Wu"
 theme: [PaperMod]
 
 enableInlineShortcodes: true
@@ -113,8 +113,8 @@ outputs:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
-  author: Theme PaperMod
+  description: "Welcome to initjiaw.log, my command line for critical thinking on human algorithm. > init: thoughts_" 
+  author: Jiawen Wu
   # author: ["Me", "You"] # multiple authors
 
   defaultTheme: auto
