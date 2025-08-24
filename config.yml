@@ -22,88 +22,85 @@ pagination:
   disableAliases: false
   pagerSize: 5
 
+# 真正的中英双语配置
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
+
 languages:
   en:
     languageName: "English"
     weight: 1
+    title: "InitJiaw.log"
     taxonomies:
       category: categories
       tag: tags
       series: series
     menu:
       main:
-        - name: Archive
-          url: archives
-          weight: 5
+        - name: Notes
+          url: /notes/
+          weight: 10
+        - name: Blog
+          url: /posts/
+          weight: 20
+        - name: Projects
+          url: /projects/
+          weight: 30
+        - name: About
+          url: /about/
+          weight: 40
         - name: Search
-          url: search/
-          weight: 10
-        - name: Tags
-          url: tags/
-          weight: 10
-        - name: WiKi
-          url: https://github.com/adityatelange/hugo-PaperMod/wiki/
-
-  fr:
-    languageName: ":fr:"
-    weight: 2
-    title: PaperModL2
-    taxonomies:
-      category: FRcategories
-      tag: FRtags
-      series: FRseries
-    menu:
-      main:
-        - name: Archive
-          url: archives/
-          weight: 5
-        - name: FRTags
-          url: frtags
-          weight: 10
-        - name: FRCategories
-          url: frcategories
-          weight: 10
-        - name: FRSeries
-          url: frseries
-          weight: 10
-        - name: NullLink
-          url: "#"
-
-    # custom params for each language should be under [langcode].parms - hugo v0.120.0
+          url: /search/
+          weight: 50
     params:
-      languageAltTitle: French
-      profileMode:
-        enabled: true
-        title: PaperMod
-        imageUrl: "https://raw.githubusercontent.com/googlefonts/noto-emoji/master/svg/emoji_u1f9d1_1f3fb_200d_1f4bb.svg"
-        imageTitle: ProfileMode image
-        # imageWidth: 120
-        # imageHeight: 120
-        subtitle: "☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive"
-        buttons:
-          - name: Blog
-            url: posts
-          - name: Profile Mode
-            url: https://github.com/adityatelange/hugo-PaperMod/wiki/Features#profile-mode
-
-  fa:
-    languagedirection: rtl
-    weight: 3
-    title: PaperMod RTL
-    taxonomies:
-      category: FAcategories
-      tag: FAtags
-      series: FAseries
-    menu:
-      main:
-        - name: FATags
-          url: fatags
-          weight: 10
-    # custom params for each language should be under [langcode].parms - hugo v0.120.0
-    params:
+      # 英语版本使用 Home-Info Mode
       homeInfoParams:
-        Title: "Hi there \U0001F44B"
-        Content: Welcome to RTL layout
+        Title: "Hey, I'm Jiawen! 👋"
+        Content: >
+          🧠 **initjiaw.log - Critical Thinking Command Line**
+          
+          I'm a computational social science researcher, exploring the fascinating 
+          intersection where **human cognition meets algorithmic systems**.
+          
+          This is my digital space for critical thinking, algorithm ethics, and 
+          social computing research. Welcome to my intellectual journey! 🌱
+
+  zh:
+    languageName: "中文"
+    weight: 2
+    title: "InitJiaw.log"
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: 笔记
+          url: /zh/notes/
+          weight: 10
+        - name: 博客
+          url: /zh/posts/
+          weight: 20
+        - name: 项目
+          url: /zh/projects/
+          weight: 30
+        - name: 关于
+          url: /zh/about/
+          weight: 40
+        - name: 搜索
+          url: /zh/search/
+          weight: 50
+    params:
+      # 中文版本也使用 Home-Info Mode，但内容不同
+      homeInfoParams:
+        Title: "你好，我是嘉文！ 👋"
+        Content: >
+          🧠 **initjiaw.log - 批判性思维命令行**
+          
+          我是一名计算社会科学研究者，探索**人类认知与算法系统**的迷人交汇点。
+          
+          这里是我进行批判性思维、算法伦理和社会计算研究的数字空间。
+          欢迎来到我的智识之旅！ 🌱
 
 outputs:
   home:
@@ -137,29 +134,37 @@ params:
   # comments: false
   images: ["images/papermod-cover.png"]
 
+  # Profile Mode 全局关闭，保留配置作为模板
   profileMode:
-    enabled: false
-    title: PaperMod
-    imageUrl: "#"
-    imageTitle: my image
-    # imageWidth: 120
-    # imageHeight: 120
+    enabled: false  # 设置为 true 可切换首页为Profile Mode
+    title: "Jiawen Wu"
+    imageUrl: "/images/avatar.jpg"  # 需要准备头像文件
+    imageTitle: "Jiawen Wu - Researcher"
+    imageWidth: 120
+    imageHeight: 120
+    subtitle: "🧠 Critical Thinking | 🔬 Computational Social Science | 📝 Academic Research"
     buttons:
-      - name: Archives
-        url: archives
-      - name: Tags
-        url: tags
+      - name: "📚 Research"
+        url: /posts/
+      - name: "🏷️ Topics"
+        url: /tags/
+      - name: "📁 Projects"
+        url: /projects/
+      - name: "🔍 Search"
+        url: /search/
 
+  # 删除全局的 homeInfoParams，改用语言特定的配置
+  # homeInfoParams 现在在每个语言的 params 下配置
+  
+  # 全局后备的 homeInfoParams（如果某个语言没有特定配置时使用）
   homeInfoParams:
-    Title: "PaperMod's Demo"
+    Title: "Welcome to InitJiaw.log! 👋"
     Content: >
-      👋 Welcome to demo page of Hugo's theme PaperMod!
-
-      - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
-
-      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
-
-      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3).
+      🧠 **Critical Thinking Command Line**
+      
+      This is my digital space for exploring the intersection of human cognition 
+      and algorithmic systems. Please switch to your preferred language using 
+      the language selector above.
 
   socialIcons:
     - name: github
