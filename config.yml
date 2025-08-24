@@ -1,7 +1,7 @@
 # If your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would
 # contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 baseURL: ""
-title: initJiaw.log
+title: InitJiaw.log
 copyright: "© 2025 Jiawen Wu"
 theme: [PaperMod]
 
@@ -114,6 +114,7 @@ outputs:
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   description: "Welcome to initjiaw.log, my command line for critical thinking on human algorithm. > init: thoughts_" 
+  keywords: [学术, 研究, 博客, 批判性思维, 计算社会科学, Academic, Research, Blog, Critical Thinking, Computational Social Science, Jiawen Wu]
   author: Jiawen Wu
   # author: ["Me", "You"] # multiple authors
 
@@ -130,6 +131,9 @@ params:
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true
+  ShowWordCount: true
+  UseHugoToc: true
+  DateFormat: "January 2, 2006"
   # comments: false
   images: ["images/papermod-cover.png"]
 
@@ -199,14 +203,15 @@ params:
   #     hiddenInList: true # hide on list pages and home
   #     hiddenInSingle: true # hide on single page
 
-  # fuseOpts:
-  #     isCaseSensitive: false
-  #     shouldSort: true
-  #     location: 0
-  #     distance: 1000
-  #     threshold: 0.4
-  #     minMatchCharLength: 0
-  #     keys: ["title", "permalink", "summary", "content"]
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    limit: 10
+    keys: ["title", "permalink", "summary", "content"]
 
 markup:
   goldmark:
