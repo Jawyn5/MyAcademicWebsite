@@ -46,7 +46,7 @@
   left: 0;
   width: 100%;
   height: calc(100vh - var(--header-height, 60px)); /* Adjust height to account for header */
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent; /* No darkening overlay on desktop */
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -296,6 +296,11 @@
     left: -280px;
   }
   
+  /* Add overlay background on mobile for better focus */
+  .sidebar-overlay {
+    background: rgba(0, 0, 0, 0.3); /* Light overlay on mobile/tablet */
+  }
+  
   /* On tablet, move content and center it with original width constraints */
   .sidebar-open .main {
     margin-left: 280px; /* Push content away from sidebar */
@@ -335,6 +340,11 @@
   .sidebar {
     width: 100%;
     left: -100%;
+  }
+  
+  /* Stronger overlay on very small screens */
+  .sidebar-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay on small mobile */
   }
   
   /* On small mobile, overlay only - no content shift */
