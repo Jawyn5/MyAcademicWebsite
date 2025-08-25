@@ -11,6 +11,22 @@
   justify-content: center;
 }
 
+/* Left-positioned sidebar toggle button (next to logo) */
+.sidebar-toggle-left {
+  margin-left: 12px;
+  padding: 4px 8px;
+  height: auto;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* Ensure logo area displays items in a row */
+.logo {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: inherit;
+}
+
 #sidebar-toggle:hover {
   color: var(--secondary);
 }
