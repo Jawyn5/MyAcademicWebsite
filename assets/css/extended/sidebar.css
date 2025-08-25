@@ -93,15 +93,20 @@
 
 /* Sidebar Content */
 .sidebar-content {
-  padding: 24px;
+  padding: 32px 24px 24px 24px;
 }
 
+/* Sidebar Section */
 .sidebar-section {
-  margin-bottom: 32px;
+  margin-bottom: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
 }
 
 .sidebar-section:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .sidebar-section-title {
@@ -109,8 +114,8 @@
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+  border-bottom: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
