@@ -249,9 +249,22 @@
 }
 
 /* Main content shift when sidebar is open */
+/* Move content to remaining space and center it with original width constraints */
 .sidebar-open .main {
-  margin-left: 320px;
-  transition: margin-left 0.3s ease;
+  margin-left: 320px; /* Push content away from sidebar */
+  width: calc(100vw - 320px); /* Use remaining viewport space */
+  max-width: calc(100vw - 320px); /* Ensure content doesn't overflow */
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally in remaining space */
+}
+
+/* Ensure main content children maintain original max-width */
+.sidebar-open .main > * {
+  width: 100%;
+  max-width: var(--main-width, 900px); /* Use theme's main content width */
 }
 
 /* Remove header shift - header stays in place */
@@ -261,8 +274,19 @@
 } */
 
 .sidebar-open .footer {
-  margin-left: 320px;
-  transition: margin-left 0.3s ease;
+  margin-left: 320px; /* Push footer away from sidebar */
+  width: calc(100vw - 320px); /* Use remaining viewport space */
+  max-width: calc(100vw - 320px); /* Ensure footer doesn't overflow */
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center; /* Center footer content */
+}
+
+/* Ensure footer content maintains original max-width */
+.sidebar-open .footer > * {
+  width: 100%;
+  max-width: var(--main-width, 900px); /* Use theme's main content width */
 }
 
 /* Mobile responsive */
@@ -272,10 +296,34 @@
     left: -280px;
   }
   
-  /* On mobile, no content shift - sidebar overlays */
-  .sidebar-open .main,
+  /* On tablet, move content and center it with original width constraints */
+  .sidebar-open .main {
+    margin-left: 280px; /* Push content away from sidebar */
+    width: calc(100vw - 280px); /* Use remaining viewport space */
+    max-width: calc(100vw - 280px); /* Ensure content doesn't overflow */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+  }
+  
+  /* Ensure main content children maintain original max-width */
+  .sidebar-open .main > * {
+    width: 100%;
+    max-width: var(--main-width, 900px); /* Use theme's main content width */
+  }
+  
   .sidebar-open .footer {
-    margin-left: 0;
+    margin-left: 280px; /* Push footer away from sidebar */
+    width: calc(100vw - 280px); /* Use remaining viewport space */
+    max-width: calc(100vw - 280px); /* Ensure footer doesn't overflow */
+    display: flex;
+    justify-content: center; /* Center footer content */
+  }
+  
+  /* Ensure footer content maintains original max-width */
+  .sidebar-open .footer > * {
+    width: 100%;
+    max-width: var(--main-width, 900px); /* Use theme's main content width */
   }
   
   .sidebar-content {
@@ -287,5 +335,19 @@
   .sidebar {
     width: 100%;
     left: -100%;
+  }
+  
+  /* On small mobile, overlay only - no content shift */
+  .sidebar-open .main,
+  .sidebar-open .footer {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    display: block; /* Reset display for mobile */
+  }
+  
+  .sidebar-open .main > *,
+  .sidebar-open .footer > * {
+    max-width: 100%; /* Full width on small mobile */
   }
 }
