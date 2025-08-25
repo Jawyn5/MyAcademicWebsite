@@ -12,7 +12,7 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true
-mainsections: ["posts", "papermod"]
+mainSections: ["posts", "papermod"]
 
 minify:
   disableXML: true
@@ -22,85 +22,26 @@ pagination:
   disableAliases: false
   pagerSize: 5
 
-# 真正的中英双语配置
-defaultContentLanguage: "en"
-defaultContentLanguageInSubdir: false
+# Single language English configuration
+languageCode: "en-us"
 
-languages:
-  en:
-    languageName: "English"
-    weight: 1
-    title: "InitJiaw.log"
-    taxonomies:
-      category: categories
-      tag: tags
-      series: series
-    menu:
-      main:
-        - name: Notes
-          url: /notes/
-          weight: 10
-        - name: Blog
-          url: /posts/
-          weight: 20
-        - name: Projects
-          url: /projects/
-          weight: 30
-        - name: About
-          url: /about/
-          weight: 40
-        - name: Search
-          url: /search/
-          weight: 50
-    params:
-      # 英语版本使用 Home-Info Mode
-      homeInfoParams:
-        Title: "Hey, I'm Jiawen! 👋"
-        Content: >
-          🧠 **initjiaw.log - Critical Thinking Command Line**
-          
-          I'm a computational social science researcher, exploring the fascinating 
-          intersection where **human cognition meets algorithmic systems**.
-          
-          This is my digital space for critical thinking, algorithm ethics, and 
-          social computing research. Welcome to my intellectual journey! 🌱
-
-  zh:
-    languageName: "中文"
-    weight: 2
-    title: "InitJiaw.log"
-    taxonomies:
-      category: categories
-      tag: tags
-      series: series
-    menu:
-      main:
-        - name: 笔记
-          url: /zh/notes/
-          weight: 10
-        - name: 博客
-          url: /zh/posts/
-          weight: 20
-        - name: 项目
-          url: /zh/projects/
-          weight: 30
-        - name: 关于
-          url: /zh/about/
-          weight: 40
-        - name: 搜索
-          url: /zh/search/
-          weight: 50
-    params:
-      # 中文版本也使用 Home-Info Mode，但内容不同
-      homeInfoParams:
-        Title: "你好，我是嘉文！ 👋"
-        Content: >
-          🧠 **initjiaw.log - 批判性思维命令行**
-          
-          我是一名计算社会科学研究者，探索**人类认知与算法系统**的迷人交汇点。
-          
-          这里是我进行批判性思维、算法伦理和社会计算研究的数字空间。
-          欢迎来到我的智识之旅！ 🌱
+menu:
+  main:
+    - name: Notes
+      url: /archives/
+      weight: 10
+    - name: Blog
+      url: /posts/
+      weight: 20
+    - name: Projects
+      url: /projects/
+      weight: 30
+    - name: About
+      url: /about/
+      weight: 40
+    - name: Search
+      url: /search/
+      weight: 50
 
 outputs:
   home:
@@ -111,7 +52,7 @@ outputs:
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   description: "Welcome to initjiaw.log, my command line for critical thinking on human algorithm. > init: thoughts_" 
-  keywords: [学术, 研究, 博客, 批判性思维, 计算社会科学, Academic, Research, Blog, Critical Thinking, Computational Social Science, Jiawen Wu]
+  keywords: [Academic, Research, Blog, Critical Thinking, Computational Social Science, Jiawen Wu]
   author: Jiawen Wu
   # author: ["Me", "You"] # multiple authors
 
@@ -119,8 +60,6 @@ params:
   # disableThemeToggle: true
   ShowShareButtons: true
   ShowReadingTime: true
-  # disableSpecial1stPost: true
-  displayFullLangName: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
@@ -134,11 +73,11 @@ params:
   # comments: false
   images: ["images/papermod-cover.png"]
 
-  # Profile Mode 全局关闭，保留配置作为模板
+  # Profile Mode configuration (currently disabled)
   profileMode:
-    enabled: false  # 设置为 true 可切换首页为Profile Mode
+    enabled: false  # Set to true to switch to Profile Mode
     title: "Jiawen Wu"
-    imageUrl: "/images/avatar.jpg"  # 需要准备头像文件
+    imageUrl: "/images/avatar.jpg"  # Need to prepare avatar file
     imageTitle: "Jiawen Wu - Researcher"
     imageWidth: 120
     imageHeight: 120
@@ -153,18 +92,17 @@ params:
       - name: "🔍 Search"
         url: /search/
 
-  # 删除全局的 homeInfoParams，改用语言特定的配置
-  # homeInfoParams 现在在每个语言的 params 下配置
-  
-  # 全局后备的 homeInfoParams（如果某个语言没有特定配置时使用）
+  # Homepage introduction information
   homeInfoParams:
-    Title: "Welcome to InitJiaw.log! 👋"
+    Title: "Hey, I'm Jiawen! 👋"
     Content: >
-      🧠 **Critical Thinking Command Line**
+      🧠 **initjiaw.log - Critical Thinking Command Line**
       
-      This is my digital space for exploring the intersection of human cognition 
-      and algorithmic systems. Please switch to your preferred language using 
-      the language selector above.
+      I'm a computational social science researcher, exploring the fascinating 
+      intersection where **human cognition meets algorithmic systems**.
+      
+      This is my digital space for critical thinking, algorithm ethics, and 
+      social computing research. Welcome to my intellectual journey! 🌱
 
   socialIcons:
     - name: github
