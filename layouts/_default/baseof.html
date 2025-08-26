@@ -23,6 +23,13 @@
     </main>
     {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
     
+    <!-- Load TypeScript/JavaScript -->
+    {{- $ts := resources.Get "ts/main.ts" }}
+    {{- if $ts }}
+        {{- $js := $ts | js.Build (dict "format" "esm") }}
+        <script type="module">{{ $js.Content | safeJS }}</script>
+    {{- end }}
+    
     <!-- Load Sidebar JavaScript -->
     {{- $sidebarJS := resources.Get "js/sidebar.js" }}
     {{- if $sidebarJS }}

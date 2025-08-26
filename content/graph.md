@@ -1,6 +1,5 @@
 ---
-title: "Graph Data"
-type: "graph"
-layout: "single"
-outputs: ["JSON"]
+title: Content Graph
+layout: graph
+outputs: [html, json]
 ---

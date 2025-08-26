@@ -38,6 +38,10 @@
 
 {{- /* Styles */}}
 
+<!-- vis-network CSS and JS -->
+<link rel="stylesheet" href="https://unpkg.com/vis-network/dist/vis-network.min.css">
+<script src="https://unpkg.com/vis-network/dist/vis-network.min.js"></script>
+
 {{- /* includes */}}
 {{- $includes := slice }}
 {{- $includes = $includes | append (" " | resources.FromString "assets/css/includes-blank.css")}}
