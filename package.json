@@ -1,0 +1,23 @@
+{
+  "name": "myacademicwebsite",
+  "version": "1.0.0",
+  "description": "This repository offers an example site for [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jawyn5/MyAcademicWebsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jawyn5/MyAcademicWebsite/issues"
+  },
+  "homepage": "https://github.com/Jawyn5/MyAcademicWebsite#readme",
+  "dependencies": {
+    "vis-network": "^10.0.1"
+  }
+}

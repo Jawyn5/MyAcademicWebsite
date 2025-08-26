@@ -42,6 +42,12 @@
   </div>
   {{- end }}
 
+  {{- /* TIL Integration: Categories and Tags */ -}}
+  {{- if or (eq .Section "posts") (eq .Section "notes") -}}
+    {{ partial "page/categories" . }}
+    {{ partial "page/tags" . }}
+  {{- end -}}
+
   <footer class="post-footer">
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
