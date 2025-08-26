@@ -26,3 +26,8 @@ _testmain.go
 .DS_Store
 .hugo_build.lock
 resources/_gen/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+package-lock.json
