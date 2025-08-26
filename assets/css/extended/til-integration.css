@@ -130,3 +130,275 @@
 .til-tags ul li::marker {
   content: none !important;
 }
+
+/* ==============================
+   TIL Integration - Backlinks Styles
+   ============================== */
+
+/* Backlinks主容器 */
+.til-backlinks {
+  margin-top: 2rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* Backlinks部分 */
+.til-backlinks-section {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+}
+
+/* 主标题样式 */
+.til-backlinks-section h2 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  color: var(--content) !important;
+}
+
+/* 子部分样式 */
+.til-backlinks-subsection {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+/* 子标题样式 */
+.til-backlinks-subsection h3 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  color: var(--content) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Backlinks列表容器 */
+.til-backlinks-list {
+  margin-left: 1.5rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.til-backlinks-list li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 文章条目样式 */
+.til-backlinks-list article {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+.til-backlinks-list header {
+  flex-grow: 1 !important;
+}
+
+.til-backlinks-list h4 {
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+  font-weight: normal !important;
+}
+
+.til-backlinks-list h4 a {
+  color: var(--content) !important;
+  text-decoration: underline !important;
+  text-decoration-color: #cbd5e1 !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 4px !important;
+  transition: all 0.2s ease !important;
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.til-backlinks-list h4 a:hover {
+  text-decoration-color: var(--content) !important;
+  text-decoration: underline !important;
+}
+
+/* Categories标签样式 */
+.til-backlinks-categories {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.5rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.til-backlinks-categories li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.til-backlinks-categories .taxonomy {
+  white-space: nowrap !important;
+  border-radius: 0.125rem !important;
+  border: 1px solid #e2e8f0 !important;
+  background-color: #f1f5f9 !important;
+  padding: 0.125rem 0.375rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  font-weight: 500 !important;
+  text-transform: lowercase !important;
+  text-decoration: none !important;
+  color: #374151 !important;
+  transition: all 0.2s ease !important;
+  display: inline-block !important;
+}
+
+.til-backlinks-categories .taxonomy:hover {
+  border-color: #cbd5e1 !important;
+  background-color: #e2e8f0 !important;
+  text-decoration: none !important;
+  color: #374151 !important;
+}
+
+/* SVG图标样式 */
+.til-backlinks svg {
+  width: 1rem !important;
+  height: 1rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Backlink链接样式 */
+.backlink {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  border-bottom: 1px dotted var(--primary) !important;
+  transition: all 0.2s ease !important;
+}
+
+.backlink:hover {
+  color: var(--content) !important;
+  border-bottom: 1px solid var(--content) !important;
+  text-decoration: none !important;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .til-backlinks-categories .taxonomy {
+  border-color: #475569 !important;
+  background-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .til-backlinks-categories .taxonomy:hover {
+  border-color: #64748b !important;
+  background-color: #475569 !important;
+  color: #f1f5f9 !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .til-backlinks-list {
+    margin-left: 0.5rem !important;
+  }
+  
+  .til-backlinks-list article {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  
+  .til-backlinks-categories {
+    justify-content: flex-start !important;
+  }
+  
+  .til-backlinks-categories .taxonomy {
+    font-size: 0.6875rem !important;
+    padding: 0.0625rem 0.25rem !important;
+  }
+}
+
+/* 确保不与其他元素冲突 */
+.til-backlinks-list li:before,
+.til-backlinks-categories li:before {
+  content: none !important;
+}
+
+.til-backlinks-list li::marker,
+.til-backlinks-categories li::marker {
+  content: none !important;
+}
+
+/* ==============================
+   TIL Integration - Graph Network Styles
+   ============================== */
+
+/* Graph主容器 */
+.til-graph {
+  margin-top: 2rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* Graph标题样式 */
+.til-graph h2 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  color: var(--content) !important;
+}
+
+/* Graph容器 */
+.til-graph-container {
+  height: 256px !important;
+  margin-left: 1.5rem !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.375rem !important;
+  background-color: var(--theme) !important;
+  position: relative !important;
+}
+
+/* Graph状态样式 */
+.graph-loading,
+.graph-empty,
+.graph-error {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  color: var(--secondary) !important;
+  font-size: 0.875rem !important;
+  text-align: center !important;
+}
+
+.graph-error {
+  color: var(--primary) !important;
+}
+
+/* Graph SVG图标样式 */
+.til-graph svg {
+  width: 1rem !important;
+  height: 1rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .til-graph-container {
+    height: 200px !important;
+    margin-left: 0.5rem !important;
+  }
+}

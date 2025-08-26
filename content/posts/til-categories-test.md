@@ -50,3 +50,11 @@ function testFunction() {
 - 无序列表项A
 - 无序列表项B
 - 无序列表项C
+
+## 总结
+
+TIL主题的Categories功能成功集成到PaperMod中！这为后续的其他TIL功能奠定了基础。
+
+相关功能测试：
+- {{< backlink "til-backlinks-test" "Backlinks功能测试" >}}
+- {{< backlink "til-backlinks-notes-test" "Backlinks笔记" >}}

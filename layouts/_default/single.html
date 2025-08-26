@@ -42,10 +42,12 @@
   </div>
   {{- end }}
 
-  {{- /* TIL Integration: Categories and Tags */ -}}
+  {{- /* TIL Integration: Categories, Tags, Graph and Backlinks */ -}}
   {{- if or (eq .Section "posts") (eq .Section "notes") -}}
     {{ partial "page/categories" . }}
     {{ partial "page/tags" . }}
+    {{ partial "page/graph" . }}
+    {{ partial "page/backlinks" . }}
   {{- end -}}
 
   <footer class="post-footer">

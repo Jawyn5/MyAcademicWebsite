@@ -48,6 +48,9 @@ outputs:
     - HTML
     - RSS
     - JSON
+  page:
+    - HTML
+    - JSON
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
@@ -72,6 +75,9 @@ params:
   DateFormat: "January 2, 2006"
   # comments: false
   images: ["images/papermod-cover.png"]
+  
+  # TIL Integration
+  showGraph: true
 
   # Profile Mode configuration (currently disabled)
   profileMode:

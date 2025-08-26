@@ -1,0 +1,167 @@
+{{- if default true site.Params.showGraph -}}
+<div class="til-graph">
+  <h2>
+    {{ partial "svg/chart-network" }}
+    <span>Graph</span>
+  </h2>
+  <div class="til-graph-container" id="graph-container-{{ .File.UniqueID }}">
+    <div class="graph-loading">正在加载图形...</div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('graph-container-{{ .File.UniqueID }}');
+  if (!container) return;
+  
+  console.log('Loading graph data...');
+  
+  // 检查vis库是否加载
+  if (typeof vis === 'undefined') {
+    console.error('vis-network library not loaded');
+    container.innerHTML = '<div class="graph-error">vis-network库未加载</div>';
+    return;
+  }
+  
+  // 加载图形数据
+  fetch('{{ relURL "graph.json" }}')
+    .then(response => {
+      console.log('Graph data response:', response.status);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Graph data loaded:', data);
+      
+      // 处理图形数据
+      const pages = data.pages || {};
+      const graph = data.graph || {};
+      const currentPage = '{{ .RelPermalink }}';
+      
+      console.log('Current page:', currentPage);
+      console.log('Pages:', Object.keys(pages).length);
+      console.log('Graph:', Object.keys(graph).length);
+      
+      // 创建nodes和edges
+      const nodes = [];
+      const edges = [];
+      const connectedPages = new Set();
+      
+      // 添加当前页面的连接
+      if (graph[currentPage]) {
+        console.log('Current page graph data:', graph[currentPage]);
+        
+        // 添加outgoing连接
+        if (graph[currentPage].out) {
+          graph[currentPage].out.forEach(targetPermalink => {
+            if (pages[targetPermalink]) {
+              connectedPages.add(targetPermalink);
+              edges.push({
+                from: currentPage,
+                to: targetPermalink
+              });
+            }
+          });
+        }
+        
+        // 添加incoming连接
+        if (graph[currentPage].in) {
+          graph[currentPage].in.forEach(sourcePermalink => {
+            if (pages[sourcePermalink]) {
+              connectedPages.add(sourcePermalink);
+              edges.push({
+                from: sourcePermalink,
+                to: currentPage
+              });
+            }
+          });
+        }
+      }
+      
+      // 添加当前页面
+      connectedPages.add(currentPage);
+      
+      console.log('Connected pages:', Array.from(connectedPages));
+      console.log('Edges:', edges);
+      
+      // 创建节点
+      connectedPages.forEach(permalink => {
+        const page = pages[permalink];
+        if (page) {
+          nodes.push({
+            id: permalink,
+            label: page.title,
+            color: permalink === currentPage ? '#3b82f6' : (page.section === 'posts' ? '#10b981' : '#f59e0b'),
+            font: {
+              color: permalink === currentPage ? '#ffffff' : '#374151'
+            }
+          });
+        }
+      });
+      
+      console.log('Nodes:', nodes);
+      
+      // 如果有连接才显示图形
+      if (nodes.length > 1) {
+        // 使用vis-network创建图形
+        const graphData = {
+          nodes: new vis.DataSet(nodes),
+          edges: new vis.DataSet(edges)
+        };
+        
+        const options = {
+          physics: {
+            enabled: true,
+            stabilization: { iterations: 100 }
+          },
+          nodes: {
+            shape: 'dot',
+            size: 20,
+            font: {
+              size: 12
+            },
+            borderWidth: 2
+          },
+          edges: {
+            arrows: {
+              to: { enabled: true, scaleFactor: 0.5 }
+            },
+            smooth: {
+              type: 'continuous'
+            }
+          },
+          interaction: {
+            hover: true,
+            tooltipDelay: 200
+          }
+        };
+        
+        container.innerHTML = '';
+        console.log('Creating network...');
+        const network = new vis.Network(container, graphData, options);
+        
+        // 点击节点跳转
+        network.on('click', function(params) {
+          if (params.nodes.length > 0) {
+            const nodeId = params.nodes[0];
+            if (nodeId !== currentPage) {
+              window.location.href = nodeId;
+            }
+          }
+        });
+        
+        console.log('Network created successfully');
+      } else {
+        console.log('No connections found, showing empty message');
+        container.innerHTML = '<div class="graph-empty">暂无连接的文章</div>';
+      }
+    })
+    .catch(error => {
+      console.error('Failed to load graph data:', error);
+      container.innerHTML = '<div class="graph-error">加载图形失败: ' + error.message + '</div>';
+    });
+});
+</script>
+{{- end -}}

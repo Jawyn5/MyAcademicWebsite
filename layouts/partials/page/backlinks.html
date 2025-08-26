@@ -1,0 +1,258 @@
+{{- $noop := partialCached "functions/linkable-pages" . -}}
+{{- $incomingPosts := slice -}}
+{{- $outgoingPosts := slice -}}
+{{- $incomingNotes := slice -}}
+{{- $outgoingNotes := slice -}}
+{{- with .Scratch.Get "incoming" -}}
+  {{- $incomingPosts = where . "Section" "posts" -}}
+  {{- $incomingNotes = where . "Section" "notes" -}}
+{{- end -}}
+{{- with .Scratch.Get "outgoing" -}}
+  {{- $outgoingNotes = where . "Section" "notes" -}}
+  {{- $outgoingPosts = where . "Section" "posts" -}}
+{{- end -}}
+{{- $relatedPosts := where (.Site.RegularPages.Related .) "Section" "posts" | first 5 -}}
+{{- $relatedNotes := where (.Site.RegularPages.Related .) "Section" "notes" | first 5 -}}
+
+{{/* 动态判断显示规则 */}}
+{{- $hasPostConnections := or (gt (len $incomingPosts) 0) (gt (len $outgoingPosts) 0) -}}
+{{- $hasNoteConnections := or (gt (len $incomingNotes) 0) (gt (len $outgoingNotes) 0) -}}
+{{- $showPosts := false -}}
+{{- $showNotes := false -}}
+
+{{- if and $hasPostConnections $hasNoteConnections -}}
+  {{/* 如果同时连接了posts和notes，都显示 */}}
+  {{- $showPosts = true -}}
+  {{- $showNotes = true -}}
+{{- else if $hasPostConnections -}}
+  {{/* 只连接了posts，只显示posts */}}
+  {{- $showPosts = true -}}
+{{- else if $hasNoteConnections -}}
+  {{/* 只连接了notes，只显示notes */}}
+  {{- $showNotes = true -}}
+{{- else -}}
+  {{/* 没有连接，显示related内容（如果有的话） */}}
+  {{- if gt (len $relatedPosts) 0 -}}
+    {{- $showPosts = true -}}
+  {{- end -}}
+  {{- if gt (len $relatedNotes) 0 -}}
+    {{- $showNotes = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $postsCount := 0 -}}
+{{- $notesCount := 0 -}}
+{{- if $showPosts -}}
+  {{- $postsCount = add ( len $incomingPosts ) ( len $outgoingPosts ) ( len $relatedPosts ) -}}
+{{- end -}}
+{{- if $showNotes -}}
+  {{- $notesCount = add ( len $incomingNotes ) ( len $outgoingNotes ) ( len $relatedNotes ) -}}
+{{- end -}}
+
+{{- if and $showPosts (gt $postsCount 0) -}}
+<div class="til-backlinks">
+  <div class="til-backlinks-section">
+    <h2>
+      {{ partial "svg/newspaper" }}
+      <span>Posts</span>
+    </h2>
+
+    {{- with $incomingPosts -}}
+    <div class="til-backlinks-subsection">
+      <h3>
+        {{ partial "svg/arrow-down-to-dot" }}
+        <span>Incoming</span>
+      </h3>
+      <ol class="til-backlinks-list">
+        {{- range . -}}
+        <li>
+          <article>
+            <header>
+              <h4>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | title }}</a>
+              </h4>
+            </header>
+            {{- with .GetTerms "categories" -}}
+            <ul class="til-backlinks-categories">
+              {{- range . -}}
+              <li>
+                <a href="{{ .RelPermalink }}" class="taxonomy category" title="Posts and notes on {{ .LinkTitle }}">{{ .LinkTitle }}</a>
+              </li>
+              {{- end -}}
+            </ul>
+            {{- end -}}
+          </article>
+        </li>
+        {{- end -}}
+      </ol>
+    </div>
+    {{- end -}}
+
+    {{- with $outgoingPosts -}}
+    <div class="til-backlinks-subsection">
+      <h3>
+        {{ partial "svg/arrow-up-from-dot" }}
+        <span>Outgoing</span>
+      </h3>
+      <ol class="til-backlinks-list">
+        {{- range . -}}
+        <li>
+          <article>
+            <header>
+              <h4>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | title }}</a>
+              </h4>
+            </header>
+            {{- with .GetTerms "categories" -}}
+            <ul class="til-backlinks-categories">
+              {{- range . -}}
+              <li>
+                <a href="{{ .RelPermalink }}" class="taxonomy category" title="Posts and notes on {{ .LinkTitle }}">{{ .LinkTitle }}</a>
+              </li>
+              {{- end -}}
+            </ul>
+            {{- end -}}
+          </article>
+        </li>
+        {{- end -}}
+      </ol>
+    </div>
+    {{- end -}}
+
+    {{- with $relatedPosts -}}
+    <div class="til-backlinks-subsection">
+      <h3>
+        {{ partial "svg/approximate-equals" }}
+        <span>Related</span>
+      </h3>
+      <ol class="til-backlinks-list">
+        {{- range . -}}
+        <li>
+          <article>
+            <header>
+              <h4>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | title }}</a>
+              </h4>
+            </header>
+            {{- with .GetTerms "categories" -}}
+            <ul class="til-backlinks-categories">
+              {{- range . -}}
+              <li>
+                <a href="{{ .RelPermalink }}" class="taxonomy category" title="Posts and notes on {{ .LinkTitle }}">{{ .LinkTitle }}</a>
+              </li>
+              {{- end -}}
+            </ul>
+            {{- end -}}
+          </article>
+        </li>
+        {{- end -}}
+      </ol>
+    </div>
+    {{- end -}}
+  </div>
+</div>
+{{- end -}}
+
+{{- if and $showNotes (gt $notesCount 0) -}}
+<div class="til-backlinks">
+  <div class="til-backlinks-section">
+    <h2>
+      {{ partial "svg/notebook-text" }}
+      <span>Notes</span>
+    </h2>
+
+    {{- with $incomingNotes -}}
+    <div class="til-backlinks-subsection">
+      <h3>
+        {{ partial "svg/arrow-down-to-dot" }}
+        <span>Incoming</span>
+      </h3>
+      <ol class="til-backlinks-list">
+        {{- range . -}}
+        <li>
+          <article>
+            <header>
+              <h4>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | title }}</a>
+              </h4>
+            </header>
+            {{- with .GetTerms "categories" -}}
+            <ul class="til-backlinks-categories">
+              {{- range . -}}
+              <li>
+                <a href="{{ .RelPermalink }}" class="taxonomy category" title="Posts and notes on {{ .LinkTitle }}">{{ .LinkTitle }}</a>
+              </li>
+              {{- end -}}
+            </ul>
+            {{- end -}}
+          </article>
+        </li>
+        {{- end -}}
+      </ol>
+    </div>
+    {{- end -}}
+
+    {{- with $outgoingNotes -}}
+    <div class="til-backlinks-subsection">
+      <h3>
+        {{ partial "svg/arrow-up-from-dot" }}
+        <span>Outgoing</span>
+      </h3>
+      <ol class="til-backlinks-list">
+        {{- range . -}}
+        <li>
+          <article>
+            <header>
+              <h4>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | title }}</a>
+              </h4>
+            </header>
+            {{- with .GetTerms "categories" -}}
+            <ul class="til-backlinks-categories">
+              {{- range . -}}
+              <li>
+                <a href="{{ .RelPermalink }}" class="taxonomy category" title="Posts and notes on {{ .LinkTitle }}">{{ .LinkTitle }}</a>
+              </li>
+              {{- end -}}
+            </ul>
+            {{- end -}}
+          </article>
+        </li>
+        {{- end -}}
+      </ol>
+    </div>
+    {{- end -}}
+
+    {{- with $relatedNotes -}}
+    <div class="til-backlinks-subsection">
+      <h3>
+        {{ partial "svg/approximate-equals" }}
+        <span>Related</span>
+      </h3>
+      <ol class="til-backlinks-list">
+        {{- range . -}}
+        <li>
+          <article>
+            <header>
+              <h4>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | title }}</a>
+              </h4>
+            </header>
+            {{- with .GetTerms "categories" -}}
+            <ul class="til-backlinks-categories">
+              {{- range . -}}
+              <li>
+                <a href="{{ .RelPermalink }}" class="taxonomy category" title="Posts and notes on {{ .LinkTitle }}">{{ .LinkTitle }}</a>
+              </li>
+              {{- end -}}
+            </ul>
+            {{- end -}}
+          </article>
+        </li>
+        {{- end -}}
+      </ol>
+    </div>
+    {{- end -}}
+  </div>
+</div>
+{{- end -}}
