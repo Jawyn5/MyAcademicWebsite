@@ -70,21 +70,8 @@
   z-index: 1000;
   transition: left 0.3s ease;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-}
-
-.sidebar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 3px;
+  /* Use theme's scrollbar styling system */
+  /* Remove custom scrollbar styles - let theme handle it */
 }
 
 .sidebar-open .sidebar {
