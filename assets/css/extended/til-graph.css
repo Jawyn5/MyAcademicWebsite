@@ -6,11 +6,12 @@ content-network-graph {
   width: 100% !important;
   height: 24rem !important; /* h-96 equivalent */
   position: relative !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 4px !important;
+  border: 1px solid #e5e7eb !important; /* 更淡的边框颜色 */
+  border-radius: 0px !important; /* 移除圆角 */
   background: white !important;
   overflow: hidden !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  margin-left: 1.5rem !important; /* 左边距，与标题对齐 */
+  margin-right: 1.5rem !important; /* 右边距保持对称 */
 }
 
 /* 暗模式支持 */
@@ -44,24 +45,23 @@ content-network-graph ul li button {
   justify-content: center !important;
   width: 32px !important;
   height: 32px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid #d1d5db !important;
-  border-radius: 4px !important;
+  background: rgba(255, 255, 255, 0.9) !important; /* 稍微透明 */
+  border: 1px solid #e5e7eb !important; /* 更淡的边框 */
+  border-radius: 2px !important; /* 更小的圆角 */
   cursor: pointer !important;
   transition: all 0.2s ease !important;
 }
 
 content-network-graph ul li button:hover {
   background: white !important;
-  border-color: #9ca3af !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-  transform: translateY(-1px) !important;
+  border-color: #d1d5db !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; /* 更淡的阴影 */
 }
 
 content-network-graph ul li button svg {
   width: 16px !important;
   height: 16px !important;
-  color: #374151 !important;
+  color: #9ca3af !important; /* 灰色，不是黑色 */
 }
 
 /* 暗模式按钮样式 */
