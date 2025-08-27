@@ -234,17 +234,14 @@ section:has(content-network-graph) + hr {
   padding: 0.1rem 0 !important; /* 微小的上下padding */
 }
 
-/* TIL标签样式 - 精确复制TIL主题的形状和比例 */
+/* TIL标签样式 - 亮色模式使用TIL原版配色，深色模式使用PaperMod配色 */
 .til-backlinks-categories .taxonomy,
 .til-backlinks-categories .taxonomy.category,
 .til-backlinks-categories a.taxonomy,
 .til-backlinks-categories a.taxonomy.category {
   border-radius: 0.125rem !important; /* rounded-sm */
-  background: var(--code-bg) !important;
-  border: 1px solid var(--border) !important;
   display: inline-block !important;
   padding: 0.125rem 0.25rem !important; /* 上下更紧凑，左右适中 */
-  color: var(--secondary) !important;
   font-size: 0.875rem !important; /* text-sm */
   line-height: 1.25 !important; /* 紧凑的行高 */
   text-decoration: none !important;
@@ -252,16 +249,42 @@ section:has(content-network-graph) + hr {
   text-transform: lowercase !important;
   white-space: nowrap !important;
   transition: all 0.2s ease !important;
+  
+  /* 亮色模式 - TIL原版配色 */
+  background: #f1f5f9 !important; /* bg-slate-100 */
+  border: 1px solid #e2e8f0 !important; /* border-slate-200 */
+  color: #374151 !important; /* 深色文字 */
 }
 
-/* TIL标签hover状态 - 匹配PaperMod */
+/* TIL标签hover状态 - 亮色模式 */
 .til-backlinks-categories .taxonomy:hover,
 .til-backlinks-categories .taxonomy.category:hover,
 .til-backlinks-categories a.taxonomy:hover,
 .til-backlinks-categories a.taxonomy.category:hover {
+  background: #e2e8f0 !important; /* bg-slate-200 */
+  border-color: #cbd5e1 !important; /* border-slate-300 */
+  color: #374151 !important;
+}
+
+/* 深色模式 - PaperMod配色 */
+.dark .til-backlinks-categories .taxonomy,
+.dark .til-backlinks-categories .taxonomy.category,
+.dark .til-backlinks-categories a.taxonomy,
+.dark .til-backlinks-categories a.taxonomy.category {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--secondary) !important;
+}
+
+.dark .til-backlinks-categories .taxonomy:hover,
+.dark .til-backlinks-categories .taxonomy.category:hover,
+.dark .til-backlinks-categories a.taxonomy:hover,
+.dark .til-backlinks-categories a.taxonomy.category:hover {
   background: var(--border) !important;
   color: var(--secondary) !important;
 }
+
+
 
 /* TIL Backlinks Categories 列表布局 */
 .til-backlinks-categories {
@@ -299,7 +322,7 @@ section:has(content-network-graph) + hr {
   margin: 0 !important;
 }
 
-/* TIL Categories 和 Tags 中的标签样式 - 精确复制TIL主题的形状和比例 */
+/* TIL Categories 和 Tags 中的标签样式 - 亮色模式使用TIL原版配色，深色模式使用PaperMod配色 */
 .til-categories ul li .taxonomy,
 .til-tags ul li .taxonomy,
 .til-categories .taxonomy,
@@ -311,19 +334,21 @@ section:has(content-network-graph) + hr {
   display: inline-block !important;
   white-space: nowrap !important;
   border-radius: 0.125rem !important; /* rounded-sm */
-  background: var(--code-bg) !important;
-  border: 1px solid var(--border) !important;
   padding: 0.125rem 0.25rem !important; /* 上下更紧凑，左右适中 */
-  color: var(--secondary) !important;
   font-size: 0.875rem !important; /* text-sm */
   line-height: 1.25 !important; /* 紧凑的行高 */
   text-decoration: none !important;
   font-weight: 600 !important; /* font-semibold */
   text-transform: lowercase !important;
   transition: all 0.2s ease !important;
+  
+  /* 亮色模式 - TIL原版配色 */
+  background: #f1f5f9 !important; /* bg-slate-100 */
+  border: 1px solid #e2e8f0 !important; /* border-slate-200 */
+  color: #374151 !important; /* 深色文字 */
 }
 
-/* TIL Categories 和 Tags 标签hover状态 - 使用最高优先级 */
+/* TIL Categories 和 Tags 标签hover状态 - 亮色模式 */
 .til-categories ul li .taxonomy:hover,
 .til-tags ul li .taxonomy:hover,
 .til-categories .taxonomy:hover,
@@ -332,9 +357,38 @@ section:has(content-network-graph) + hr {
 .til-tags ul li a.taxonomy:hover,
 .til-categories a.taxonomy:hover,
 .til-tags a.taxonomy:hover {
+  background: #e2e8f0 !important; /* bg-slate-200 */
+  border-color: #cbd5e1 !important; /* border-slate-300 */
+  color: #374151 !important;
+}
+
+/* 深色模式 - PaperMod配色 */
+.dark .til-categories ul li .taxonomy,
+.dark .til-tags ul li .taxonomy,
+.dark .til-categories .taxonomy,
+.dark .til-tags .taxonomy,
+.dark .til-categories ul li a.taxonomy,
+.dark .til-tags ul li a.taxonomy,
+.dark .til-categories a.taxonomy,
+.dark .til-tags a.taxonomy {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--secondary) !important;
+}
+
+.dark .til-categories ul li .taxonomy:hover,
+.dark .til-tags ul li .taxonomy:hover,
+.dark .til-categories .taxonomy:hover,
+.dark .til-tags .taxonomy:hover,
+.dark .til-categories ul li a.taxonomy:hover,
+.dark .til-tags ul li a.taxonomy:hover,
+.dark .til-categories a.taxonomy:hover,
+.dark .til-tags a.taxonomy:hover {
   background: var(--border) !important;
   color: var(--secondary) !important;
 }
+
+
 
 /* 移除之前的暗模式自定义样式，让PaperMod的变量系统自动处理 */
 
