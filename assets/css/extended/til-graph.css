@@ -3,14 +3,15 @@
 /* content-network-graph 基础样式 */
 content-network-graph {
   display: block !important;
-  width: 100% !important;
+  width: calc(100% - 3rem) !important; /* 减去左右边距 */
   height: 18rem !important; /* 减小到18rem (288px)，比原版稍小但保证内容清晰 */
   position: relative !important;
   border: 1px solid #e5e7eb !important; /* 更淡的边框颜色 */
-  border-radius: 0px !important; /* 移除圆角 */
+  border-radius: 0.375rem !important; /* 6px圆角，Tailwind的rounded-md */
   background: white !important;
   overflow: hidden !important;
-  /* 利用PaperMod的自然布局，左右留白会自动一致 */
+  margin-left: 1.5rem !important; /* 左边距，与标题文字"G"对齐（图标16px + 间距8px） */
+  margin-right: 1.5rem !important; /* 右边距，保持对称 */
 }
 
 /* 暗模式支持 */
