@@ -181,7 +181,7 @@ export default class ContentNetworkGraph extends HTMLElement {
       const permalink = this.getAttribute('page');
       const data = permalink ? graph.dataForPage(permalink) : graph.data();
 
-      this._networkEl.classList.add('absolute', 'h-full', 'w-full', 'z-40');
+      this._networkEl.classList.add('h-full', 'w-full');
       this._network = new Network(this._networkEl, data, NETWORK_OPTIONS);
 
       this._network.on('click', (event) => {
@@ -264,8 +264,8 @@ export default class ContentNetworkGraph extends HTMLElement {
   private drawActions() {
     this._actionsEl.classList.add(
       'absolute',
-      'right-1',
-      'top-1',
+      'right-2',
+      'top-2',
       'z-50',
       'flex',
       'flex-row',
@@ -278,10 +278,14 @@ export default class ContentNetworkGraph extends HTMLElement {
     expandBtn.classList.add(
       'bg-white',
       'border',
+      'border-gray-300',
       'rounded-sm',
-      'p-1',
-      'opacity-60',
-      'hover:opacity-100'
+      'p-2',
+      'opacity-80',
+      'hover:opacity-100',
+      'shadow-sm',
+      'hover:shadow-md',
+      'transition-all'
     );
 
     if (this._expanded) {
@@ -310,6 +314,14 @@ export default class ContentNetworkGraph extends HTMLElement {
     this.classList.add(...this._expandedClasslist);
     this._expanded = true;
     this.drawActions();
+    
+    // 让网络图适应新尺寸
+    if (this._network) {
+      setTimeout(() => {
+        this._network!.redraw();
+        this._network!.fit();
+      }, 100);
+    }
   }
 
   private contract() {
@@ -317,5 +329,13 @@ export default class ContentNetworkGraph extends HTMLElement {
     this.classList.add('relative', this._heightClass);
     this._expanded = false;
     this.drawActions();
+    
+    // 让网络图适应新尺寸
+    if (this._network) {
+      setTimeout(() => {
+        this._network!.redraw();
+        this._network!.fit();
+      }, 100);
+    }
   }
 }

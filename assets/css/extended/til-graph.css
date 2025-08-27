@@ -1,0 +1,156 @@
+/* TIL Graph 网络图样式修复 */
+
+/* content-network-graph 基础样式 */
+content-network-graph {
+  display: block !important;
+  width: 100% !important;
+  height: 24rem !important; /* h-96 equivalent */
+  position: relative !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 4px !important;
+  background: white !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 暗模式支持 */
+.dark content-network-graph {
+  border-color: #374151 !important;
+  background: var(--entry) !important;
+}
+
+/* 确保放大按钮在graph容器内的右上角 */
+
+content-network-graph ul {
+  position: absolute !important;
+  right: 8px !important;
+  top: 8px !important;
+  z-index: 60 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+content-network-graph ul li {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* 放大按钮样式增强 */
+content-network-graph ul li button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+content-network-graph ul li button:hover {
+  background: white !important;
+  border-color: #9ca3af !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  transform: translateY(-1px) !important;
+}
+
+content-network-graph ul li button svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: #374151 !important;
+}
+
+/* 暗模式按钮样式 */
+.dark content-network-graph ul li button {
+  background: rgba(55, 65, 81, 0.95) !important;
+  border-color: #4b5563 !important;
+}
+
+.dark content-network-graph ul li button svg {
+  color: #d1d5db !important;
+}
+
+.dark content-network-graph ul li button:hover {
+  background: #374151 !important;
+  border-color: #6b7280 !important;
+}
+
+/* 网络图容器样式 */
+content-network-graph > div:first-child {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 确保vis-network画布正确显示 */
+content-network-graph > div:first-child > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+content-network-graph > div:first-child canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 全屏模式增强 */
+content-network-graph.fixed {
+  border-radius: 8px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 加载消息样式 */
+content-network-graph .message {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 50 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+.dark content-network-graph .message {
+  background: rgba(31, 41, 55, 0.95) !important;
+  color: #f3f4f6 !important;
+}
+
+/* 移除Graph页面下方的分割线 */
+.main article section:has(content-network-graph) {
+  border-bottom: none !important;
+}
+
+.main article section:has(content-network-graph) + * {
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+
+/* 确保graph页面没有多余的分割线 */
+body:has([data-endpoint*="graph"]) .main article {
+  border-bottom: none !important;
+}
+
+body:has([data-endpoint*="graph"]) .main article + * {
+  border-top: none !important;
+}
+
+/* 移除可能的水平分割线 */
+hr:has(~ *:has(content-network-graph)),
+.separator:has(~ *:has(content-network-graph)),
+.divider:has(~ *:has(content-network-graph)) {
+  display: none !important;
+}
+
+/* 确保Posts部分紧贴Graph */
+section:has(content-network-graph) ~ * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+}
