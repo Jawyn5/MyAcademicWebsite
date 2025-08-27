@@ -171,11 +171,66 @@ section:has(content-network-graph) + hr {
   display: none !important;
 }
 
-/* 专门移除til-backlinks的顶部边框 */
+/* TIL Backlinks 间距调整 - 完全复制原主题的Tailwind space-y实现 */
+
+/* 整体backlinks容器 */
 .til-backlinks {
   border-top: none !important;
-  margin-top: 2rem !important;
+  margin-top: 2rem !important; 
   padding-top: 0 !important;
+}
+
+/* 复制 space-y-8: 主要模块间距（Categories → Graph → Posts → Notes）*/
+.til-backlinks > * + * {
+  margin-top: 2rem !important; /* 32px = space-y-8 */
+}
+
+/* 复制 space-y-4: section内部间距 - 调整为极紧凑间距 */
+.til-backlinks-section {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.til-backlinks-section > * + * {
+  margin-top: 0.0625rem !important; /* 1px，主标题到子标题的紧凑间距 */
+}
+
+/* 复制 space-y-1: subsection内部间距 - 调整为更紧凑 */
+.til-backlinks-subsection {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.til-backlinks-subsection > * + * {
+  margin-top: 0.015625rem !important; /* 约0.25px，极小间距，保持层次递进但更紧凑 */
+}
+
+/* subsection之间的间距 - 增加Incoming到Outgoing之间的空间 */
+.til-backlinks-subsection + .til-backlinks-subsection {
+  margin-top: 0.75rem !important; /* 12px，增加subsection间距 */
+}
+
+/* 列表本身保持紧凑，但确保文字不被遮挡 */
+.til-backlinks-list {
+  display: flex !important;
+  flex-direction: column !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.til-backlinks-list li {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important; /* 增加行高确保文字不被截断 */
+  min-height: 1.2em !important; /* 最小高度确保文字有足够空间 */
+}
+
+/* 链接文字样式确保完整显示 */
+.til-backlinks-list li article header h4 a {
+  line-height: 1.4 !important;
+  display: block !important;
+  padding: 0.1rem 0 !important; /* 微小的上下padding */
 }
 
 /* 针对Graph页面，移除所有可能的顶部边框 */
@@ -189,4 +244,9 @@ body:has([data-endpoint*="graph"]) .border-t {
 [data-endpoint*="graph"] aside,
 [data-endpoint*="graph"] .border-t {
   border-top-width: 0 !important;
+}
+
+/* 确保Posts和Notes模块都有相同的层次化紧凑间距 */
+.til-backlinks-section h2 + .til-backlinks-subsection {
+  margin-top: 0.0625rem !important; /* 1px，主标题到子标题的紧凑间距 */
 }
