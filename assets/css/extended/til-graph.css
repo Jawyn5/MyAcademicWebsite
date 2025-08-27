@@ -1,6 +1,6 @@
 /* TIL Graph 网络图样式修复 */
 
-/* content-network-graph 基础样式 */
+/* content-network-graph 基础样式 - 保持TIL原版外观 */
 content-network-graph {
   display: block !important;
   width: calc(100% - 3rem) !important; /* 减去左右边距 */

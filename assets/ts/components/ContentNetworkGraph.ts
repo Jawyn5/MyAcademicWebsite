@@ -2,54 +2,121 @@ import { IdType, Network, NodeOptions, type Options } from 'vis-network';
 import Graph from '../lib/Graph';
 import { GraphData } from '../lib/types';
 
-const NETWORK_OPTIONS: Options = {
-  nodes: {
-    shape: 'dot',
-    color: {
-      background: '#404040',
-      border: '#404040',
-      hover: {
-        background: '#3b82f6',
-        border: '#2563eb'
+// 根据当前主题返回适配的配色方案
+function getThemeAwareNetworkOptions(): Options {
+  const isDarkMode = document.documentElement.classList.contains('dark') || 
+                    document.body.classList.contains('dark');
+  
+  if (isDarkMode) {
+    // 深色模式配色
+    return {
+      nodes: {
+        shape: 'dot',
+        color: {
+          background: '#6b7280', // 更亮的灰色
+          border: '#9ca3af', // 更亮的边框
+          hover: {
+            background: '#60a5fa', // 更亮的蓝色
+            border: '#3b82f6'
+          }
+        },
+        font: {
+          face: "'LatoLatinWeb', sans-serif",
+          color: '#f1f5f9', // 浅色文字，适配深色模式
+          size: 11 // 保持TIL原版的字体大小
+        },
+        scaling: {
+          min: 4,
+          max: 30
+        }
+      },
+      edges: {
+        color: {
+          color: '#9ca3af', // 更亮的边线颜色，适配深色模式
+          hover: '#60a5fa' // 更亮的hover颜色
+        },
+        hoverWidth: 0, // 保持TIL原版样式
+        smooth: false
+      },
+      groups: {
+        useDefaultGroups: false,
+        posts: {},
+        notes: {}
+      },
+      interaction: {
+        hover: true
       }
-    },
-    font: {
-      face: "'LatoLatinWeb', sans-serif",
-      color: '#0f172a',
-      size: 11
-    },
-    scaling: {
-      min: 4,
-      max: 30
-    }
-  },
-  edges: {
-    color: {
-      color: '#d4d4d4',
-      hover: '#3b82f6'
-    },
-    hoverWidth: 0,
-    smooth: false
-  },
-  groups: {
-    useDefaultGroups: false,
-    posts: {},
-    notes: {}
-  },
-  interaction: {
-    hover: true
+    };
+  } else {
+    // 浅色模式配色 - 使用TIL主题原始配色
+    return {
+      nodes: {
+        shape: 'dot',
+        color: {
+          background: '#404040', // TIL原始深灰色节点
+          border: '#404040', // TIL原始边框颜色
+          hover: {
+            background: '#3b82f6', // TIL原始悬停蓝色
+            border: '#2563eb'
+          }
+        },
+        font: {
+          face: "'LatoLatinWeb', sans-serif",
+          color: '#0f172a', // TIL原始深色文字
+          size: 11 // TIL原始字体大小
+        },
+        scaling: {
+          min: 4,
+          max: 30
+        }
+      },
+      edges: {
+        color: {
+          color: '#d4d4d4', // TIL原始边线颜色
+          hover: '#3b82f6' // TIL原始悬停颜色
+        },
+        hoverWidth: 0, // TIL原始设置
+        smooth: false
+      },
+      groups: {
+        useDefaultGroups: false,
+        posts: {},
+        notes: {}
+      },
+      interaction: {
+        hover: true
+      }
+    };
   }
-};
+}
 
-const FADED_NODE_OPTIONS: NodeOptions = {
-  color: {
-    background: '#d4d4d4',
-    border: '#d4d4d4'
-  },
-  font: {
-    color: '#d4d4d4'
+function getThemeAwareFadedNodeOptions(): NodeOptions {
+  const isDarkMode = document.documentElement.classList.contains('dark') || 
+                    document.body.classList.contains('dark');
+  
+  if (isDarkMode) {
+    return {
+      color: {
+        background: '#4b5563',
+        border: '#4b5563'
+      },
+      font: {
+        color: '#9ca3af'
+      }
+    };
+  } else {
+    // 浅色模式 - 使用TIL主题原始淡化配色
+    return {
+      color: {
+        background: '#d4d4d4', // TIL原始淡化背景色
+        border: '#d4d4d4' // TIL原始淡化边框色
+      },
+      font: {
+        color: '#d4d4d4' // TIL原始淡化文字颜色
+      }
+    };
   }
-};
+}
 
 const OBSERVER_OPTIONS = {
   rootMargin: '0px',
@@ -123,6 +190,7 @@ export default class ContentNetworkGraph extends HTMLElement {
   private _actionsEl: HTMLUListElement;
   private _network: Network | null = null;
   private _observer: IntersectionObserver | null = null;
+  private _themeObserver: MutationObserver | null = null;
   private _heightClass: string;
   private _expanded: boolean = false;
   private _expandedClasslist = [
@@ -153,11 +221,15 @@ export default class ContentNetworkGraph extends HTMLElement {
     this._actionsEl = document.createElement('ul');
     this.replaceChildren(this._networkEl, this._messageEl, this._actionsEl);
     this.observe();
+    
+    // 监听主题变化
+    this._setupThemeObserver();
   }
 
   disconnectedCallback() {
     this._network?.destroy();
     this._observer?.disconnect();
+    this._themeObserver?.disconnect();
   }
 
   private observe() {
@@ -182,7 +254,7 @@ export default class ContentNetworkGraph extends HTMLElement {
       const data = permalink ? graph.dataForPage(permalink) : graph.data();
 
       this._networkEl.classList.add('h-full', 'w-full');
-      this._network = new Network(this._networkEl, data, NETWORK_OPTIONS);
+      this._network = new Network(this._networkEl, data, getThemeAwareNetworkOptions());
 
       this._network.on('click', (event) => {
         const nodeId = event.nodes.at(0);
@@ -198,14 +270,14 @@ export default class ContentNetworkGraph extends HTMLElement {
 
         data.nodes.forEach((node) => {
           if (node.id && !connectedNodes.includes(node.id)) {
-            data.nodes.update({ id: node.id, ...FADED_NODE_OPTIONS }); // Fade non-connected nodes
+            data.nodes.update({ id: node.id, ...getThemeAwareFadedNodeOptions() }); // Fade non-connected nodes
           }
         });
       });
 
       this._network.on('blurNode', function () {
         data.nodes.forEach((node) => {
-          data.nodes.update({ id: node.id, ...NETWORK_OPTIONS.nodes });
+          data.nodes.update({ id: node.id, ...getThemeAwareNetworkOptions().nodes });
         });
       });
 
@@ -336,6 +408,39 @@ export default class ContentNetworkGraph extends HTMLElement {
         this._network!.redraw();
         this._network!.fit();
       }, 100);
+    }
+  }
+  
+  private _setupThemeObserver() {
+    // 监听document元素的class变化来检测主题切换
+    this._themeObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          // 主题发生变化，更新网络图配色
+          this._updateNetworkTheme();
+        }
+      });
+    });
+    
+    // 同时监听html和body元素的class变化
+    this._themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    this._themeObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+  
+  private _updateNetworkTheme() {
+    if (this._network) {
+      // 重新设置网络图的配置
+      this._network.setOptions(getThemeAwareNetworkOptions());
+      
+      // 重新绘制网络图
+      this._network.redraw();
     }
   }
 }
