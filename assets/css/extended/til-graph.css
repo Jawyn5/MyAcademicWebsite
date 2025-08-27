@@ -210,13 +210,14 @@ section:has(content-network-graph) + hr {
   margin-top: 0.75rem !important; /* 12px，增加subsection间距 */
 }
 
-/* 列表本身保持紧凑，但确保文字不被遮挡 */
+/* 列表本身保持紧凑，但确保文字不被遮挡，并添加缩进 */
 .til-backlinks-list {
   display: flex !important;
   flex-direction: column !important;
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
+  margin-left: 1.5rem !important; /* 24px左边距，与子标题首字母对齐 */
 }
 
 .til-backlinks-list li {
