@@ -122,14 +122,16 @@ content-network-graph .message {
   color: #f3f4f6 !important;
 }
 
-/* 移除Graph页面下方的分割线 */
+/* 移除Graph页面下方的分割线 - 加强版 */
 .main article section:has(content-network-graph) {
   border-bottom: none !important;
+  margin-bottom: 2rem !important; /* 保持适当间距但无边框 */
 }
 
 .main article section:has(content-network-graph) + * {
   border-top: none !important;
   margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* 确保graph页面没有多余的分割线 */
@@ -144,13 +146,47 @@ body:has([data-endpoint*="graph"]) .main article + * {
 /* 移除可能的水平分割线 */
 hr:has(~ *:has(content-network-graph)),
 .separator:has(~ *:has(content-network-graph)),
-.divider:has(~ *:has(content-network-graph)) {
+.divider:has(~ *:has(content-network-graph)),
+hr:has(+ *:has(content-network-graph)) {
   display: none !important;
 }
 
-/* 确保Posts部分紧贴Graph */
-section:has(content-network-graph) ~ * {
-  margin-top: 0 !important;
+/* 移除Graph容器本身产生的边框 */
+section:has(content-network-graph) {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* 移除Notes/Posts部分紧贴Graph，移除所有可能的边框和分割线 */
+section:has(content-network-graph) ~ *,
+section:has(content-network-graph) + * {
+  margin-top: 2rem !important; /* 适当间距 */
   padding-top: 0 !important;
   border-top: none !important;
+}
+
+/* 移除任何可能的hr元素 */
+section:has(content-network-graph) ~ hr,
+section:has(content-network-graph) + hr {
+  display: none !important;
+}
+
+/* 专门移除til-backlinks的顶部边框 */
+.til-backlinks {
+  border-top: none !important;
+  margin-top: 2rem !important;
+  padding-top: 0 !important;
+}
+
+/* 针对Graph页面，移除所有可能的顶部边框 */
+body:has([data-endpoint*="graph"]) .til-backlinks,
+body:has([data-endpoint*="graph"]) aside.not-prose,
+body:has([data-endpoint*="graph"]) .border-t {
+  border-top: none !important;
+}
+
+/* 移除Tailwind的border-t类在Graph页面的效果 */
+[data-endpoint*="graph"] aside,
+[data-endpoint*="graph"] .border-t {
+  border-top-width: 0 !important;
 }

@@ -43,7 +43,7 @@
   {{- end }}
 
   {{- /* TIL Integration: Categories, Tags, Graph and Backlinks */ -}}
-  {{- if or (eq .Section "posts") (eq .Section "notes") -}}
+  {{- if and (or (eq .Section "posts") (eq .Section "notes")) (ne .Layout "graph") -}}
     {{ partial "page/categories" . }}
     {{ partial "page/tags" . }}
     {{ partial "page/graph" . }}
