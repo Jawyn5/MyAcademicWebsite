@@ -234,6 +234,110 @@ section:has(content-network-graph) + hr {
   padding: 0.1rem 0 !important; /* 微小的上下padding */
 }
 
+/* TIL标签样式 - 使用TIL主题的原始大小但保持PaperMod的颜色 */
+.til-backlinks-categories .taxonomy,
+.til-backlinks-categories .taxonomy.category,
+.til-backlinks-categories a.taxonomy,
+.til-backlinks-categories a.taxonomy.category {
+  border-radius: 0.125rem !important; /* rounded-sm */
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border) !important;
+  display: inline-block !important;
+  padding: 0.25rem !important; /* p-1 = TIL主题的原始大小 */
+  color: var(--secondary) !important;
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: normal !important;
+  text-decoration: none !important;
+  font-weight: 600 !important; /* font-semibold */
+  text-transform: lowercase !important;
+  white-space: nowrap !important;
+  transition: all 0.2s ease !important;
+}
+
+/* TIL标签hover状态 - 匹配PaperMod */
+.til-backlinks-categories .taxonomy:hover,
+.til-backlinks-categories .taxonomy.category:hover,
+.til-backlinks-categories a.taxonomy:hover,
+.til-backlinks-categories a.taxonomy.category:hover {
+  background: var(--border) !important;
+  color: var(--secondary) !important;
+}
+
+/* TIL Backlinks Categories 列表布局 */
+.til-backlinks-categories {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.375rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+.til-backlinks-categories li {
+  list-style: none !important;
+  margin: 0 !important;
+}
+
+/* TIL Categories 和 Tags 的整体布局 */
+.til-categories ul, 
+.til-tags ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.375rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin-left: 0.5rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* TIL Categories 和 Tags 的列表项 */
+.til-categories li, 
+.til-tags li {
+  list-style: none !important;
+  margin: 0 !important;
+}
+
+/* TIL Categories 和 Tags 中的标签样式 - 使用TIL主题的原始大小 */
+.til-categories ul li .taxonomy,
+.til-tags ul li .taxonomy,
+.til-categories .taxonomy,
+.til-tags .taxonomy,
+.til-categories ul li a.taxonomy,
+.til-tags ul li a.taxonomy,
+.til-categories a.taxonomy,
+.til-tags a.taxonomy {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  border-radius: 0.125rem !important; /* rounded-sm */
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border) !important;
+  padding: 0.25rem !important; /* p-1 = TIL主题的原始大小 */
+  color: var(--secondary) !important;
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: normal !important;
+  text-decoration: none !important;
+  font-weight: 600 !important; /* font-semibold */
+  text-transform: lowercase !important;
+  transition: all 0.2s ease !important;
+}
+
+/* TIL Categories 和 Tags 标签hover状态 - 使用最高优先级 */
+.til-categories ul li .taxonomy:hover,
+.til-tags ul li .taxonomy:hover,
+.til-categories .taxonomy:hover,
+.til-tags .taxonomy:hover,
+.til-categories ul li a.taxonomy:hover,
+.til-tags ul li a.taxonomy:hover,
+.til-categories a.taxonomy:hover,
+.til-tags a.taxonomy:hover {
+  background: var(--border) !important;
+  color: var(--secondary) !important;
+}
+
+/* 移除之前的暗模式自定义样式，让PaperMod的变量系统自动处理 */
+
 /* 针对Graph页面，移除所有可能的顶部边框 */
 body:has([data-endpoint*="graph"]) .til-backlinks,
 body:has([data-endpoint*="graph"]) aside.not-prose,

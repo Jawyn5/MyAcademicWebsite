@@ -5,14 +5,11 @@
     <span>Categories</span>
   </h2>
 
-  <ul style="display: flex !important; flex-wrap: wrap !important; gap: 0.5rem !important; list-style: none !important; padding: 0 !important; margin-left: 1.5rem !important;">
+  <ul>
     {{- range . -}}
-      <li style="list-style: none !important; margin: 0 !important;">
+      <li>
         <a href="{{ .RelPermalink }}" 
            class="taxonomy"
-           style="display: inline-block !important; white-space: nowrap !important; border-radius: 0.125rem !important; border: 1px solid #e2e8f0 !important; background-color: #f1f5f9 !important; padding: 0.25rem !important; font-size: 0.875rem !important; font-weight: 600 !important; text-transform: lowercase !important; text-decoration: none !important; color: #374151 !important; transition: all 0.2s ease !important;"
-           onmouseover="this.style.borderColor='#cbd5e1'; this.style.backgroundColor='#e2e8f0';"
-           onmouseout="this.style.borderColor='#e2e8f0'; this.style.backgroundColor='#f1f5f9';"
            title="Posts and notes in {{ .Name }}"
         >{{ .Name }}</a>
       </li>
