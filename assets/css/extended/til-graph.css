@@ -234,7 +234,7 @@ section:has(content-network-graph) + hr {
   padding: 0.1rem 0 !important; /* 微小的上下padding */
 }
 
-/* TIL标签样式 - 使用TIL主题的原始大小但保持PaperMod的颜色 */
+/* TIL标签样式 - 精确复制TIL主题的形状和比例 */
 .til-backlinks-categories .taxonomy,
 .til-backlinks-categories .taxonomy.category,
 .til-backlinks-categories a.taxonomy,
@@ -243,10 +243,10 @@ section:has(content-network-graph) + hr {
   background: var(--code-bg) !important;
   border: 1px solid var(--border) !important;
   display: inline-block !important;
-  padding: 0.25rem !important; /* p-1 = TIL主题的原始大小 */
+  padding: 0.125rem 0.25rem !important; /* 上下更紧凑，左右适中 */
   color: var(--secondary) !important;
   font-size: 0.875rem !important; /* text-sm */
-  line-height: normal !important;
+  line-height: 1.25 !important; /* 紧凑的行高 */
   text-decoration: none !important;
   font-weight: 600 !important; /* font-semibold */
   text-transform: lowercase !important;
@@ -299,7 +299,7 @@ section:has(content-network-graph) + hr {
   margin: 0 !important;
 }
 
-/* TIL Categories 和 Tags 中的标签样式 - 使用TIL主题的原始大小 */
+/* TIL Categories 和 Tags 中的标签样式 - 精确复制TIL主题的形状和比例 */
 .til-categories ul li .taxonomy,
 .til-tags ul li .taxonomy,
 .til-categories .taxonomy,
@@ -313,10 +313,10 @@ section:has(content-network-graph) + hr {
   border-radius: 0.125rem !important; /* rounded-sm */
   background: var(--code-bg) !important;
   border: 1px solid var(--border) !important;
-  padding: 0.25rem !important; /* p-1 = TIL主题的原始大小 */
+  padding: 0.125rem 0.25rem !important; /* 上下更紧凑，左右适中 */
   color: var(--secondary) !important;
   font-size: 0.875rem !important; /* text-sm */
-  line-height: normal !important;
+  line-height: 1.25 !important; /* 紧凑的行高 */
   text-decoration: none !important;
   font-weight: 600 !important; /* font-semibold */
   text-transform: lowercase !important;
