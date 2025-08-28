@@ -541,14 +541,7 @@ body {
   
   /* Show sidenote content on desktop */
   .sidenote-checkbox ~ .sidenote-content {
-    position: absolute !important;
-    right: 0 !important;
-    width: 12rem !important; /* w-48 */
-    cursor: default !important;
-    /* Calculate margin to push sidenotes into right margin */
-    margin-right: calc(-12rem - 4rem) !important; /* -(w-48 + margin-16) */
-    
-    /* Reset mobile styles */
+    /* Reset mobile styles first */
     position: static !important;
     width: auto !important;
     height: auto !important;
@@ -558,17 +551,24 @@ body {
     clip: auto !important;
     white-space: normal !important;
     
-    /* Apply desktop positioning */
+    /* Apply desktop positioning - TIL original style */
     position: absolute !important;
     right: 0 !important;
-    width: 12rem !important;
-    margin-right: calc(-12rem - 4rem) !important;
+    width: 10rem !important; /* w-40 for better fit */
+    cursor: default !important;
+    /* More conservative margin: leave 1rem right margin from screen edge */
+    margin-right: calc(-10rem - 2rem) !important; /* -(w-40 + margin-8) */
+    font-size: 0.875rem !important; /* text-sm */
+    line-height: 1.4 !important;
+    /* Remove all background, border, shadow - keep TIL original clean style */
   }
   
   .sidenote-content::before {
     display: flex !important; /* Show counter on desktop */
   }
 }
+
+/* Remove dark mode adjustments for desktop sidenotes background since we don't use background */
 
 /* Dark mode support for sidenotes */
 .dark .sidenote-checkbox:checked ~ .sidenote-content {
