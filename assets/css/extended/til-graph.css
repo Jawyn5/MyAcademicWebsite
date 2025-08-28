@@ -409,3 +409,186 @@ body:has([data-endpoint*="graph"]) .border-t {
 .til-backlinks-section h2 + .til-backlinks-subsection {
   margin-top: 0.0625rem !important; /* 1px，主标题到子标题的紧凑间距 */
 }
+
+/* ==============================
+   TIL Integration - Sidenotes Styles
+   ============================== */
+
+/* Body CSS reset for sidenotes counter */
+body {
+  counter-reset: sidenote-counter;
+}
+
+/* Sidenote container */
+.sidenote {
+  display: inline !important;
+  counter-increment: sidenote-counter;
+}
+
+/* Hidden checkbox for mobile interaction */
+.sidenote-checkbox {
+  display: none !important;
+}
+
+/* Sidenote content - hidden on mobile by default */
+.sidenote-checkbox ~ .sidenote-content {
+  /* Mobile: hidden by default */
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
+}
+
+/* When checkbox is checked on mobile - show sidenote content */
+.sidenote-checkbox:checked ~ .sidenote-content {
+  /* Mobile: show as block element when checked */
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  
+  left: auto !important;
+  float: left !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+  min-width: 100% !important;
+  padding-left: 1rem !important;
+  color: #0284c7 !important; /* sky-600 */
+}
+
+/* Style the mark when checkbox is checked on mobile */
+.sidenote-checkbox:checked ~ .sidenote-mark {
+  text-decoration-line: none !important;
+  color: #0284c7 !important; /* sky-600 */
+}
+
+/* Sidenote hover and active states */
+.sidenote:active,
+.sidenote:active .sidenote-content {
+  color: #0284c7 !important; /* sky-600 */
+}
+
+.sidenote:hover .sidenote-mark::after,
+.sidenote:hover .sidenote-content::before {
+  color: #0284c7 !important; /* sky-600 */
+}
+
+/* Sidenote mark styles */
+.sidenote-mark {
+  /* Smooth transitions */
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  /* Mobile: clickable with dotted underline */
+  cursor: pointer !important;
+  text-decoration-line: underline !important;
+  text-decoration-color: #0284c7 !important; /* sky-600 */
+  text-decoration-style: dotted !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 4px !important;
+}
+
+/* Sidenote mark counter */
+.sidenote-mark::after {
+  display: inline !important;
+  vertical-align: super !important;
+  font-size: 0.75rem !important; /* text-xs */
+  line-height: 1rem !important;
+  font-weight: 600 !important;
+  content: counter(sidenote-counter);
+}
+
+/* Sidenote content styles */
+.sidenote-content::before {
+  position: absolute !important;
+  left: -4rem !important; /* -left-16 */
+  bottom: 0 !important;
+  top: 0 !important;
+  display: flex !important;
+  width: 3.5rem !important; /* w-14 */
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+  font-size: 0.875rem !important; /* text-sm */
+  font-weight: 600 !important;
+  content: counter(sidenote-counter) '.';
+}
+
+.sidenote-content {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: default !important;
+}
+
+/* Large screen (desktop) styles - lg and above */
+@media screen and (min-width: 1024px) {
+  /* On large screens, hide mobile-specific styles */
+  .sidenote-mark {
+    cursor: default !important;
+    text-decoration: none !important;
+  }
+  
+  .sidenote-mark::after {
+    display: inline !important; /* Show counter on desktop */
+  }
+  
+  /* Show sidenote content on desktop */
+  .sidenote-checkbox ~ .sidenote-content {
+    position: absolute !important;
+    right: 0 !important;
+    width: 12rem !important; /* w-48 */
+    cursor: default !important;
+    /* Calculate margin to push sidenotes into right margin */
+    margin-right: calc(-12rem - 4rem) !important; /* -(w-48 + margin-16) */
+    
+    /* Reset mobile styles */
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    
+    /* Apply desktop positioning */
+    position: absolute !important;
+    right: 0 !important;
+    width: 12rem !important;
+    margin-right: calc(-12rem - 4rem) !important;
+  }
+  
+  .sidenote-content::before {
+    display: flex !important; /* Show counter on desktop */
+  }
+}
+
+/* Dark mode support for sidenotes */
+.dark .sidenote-checkbox:checked ~ .sidenote-content {
+  color: #0ea5e9 !important; /* sky-500 for dark mode */
+}
+
+.dark .sidenote-checkbox:checked ~ .sidenote-mark {
+  color: #0ea5e9 !important; /* sky-500 for dark mode */
+}
+
+.dark .sidenote:active,
+.dark .sidenote:active .sidenote-content {
+  color: #0ea5e9 !important; /* sky-500 for dark mode */
+}
+
+.dark .sidenote:hover .sidenote-mark::after,
+.dark .sidenote:hover .sidenote-content::before {
+  color: #0ea5e9 !important; /* sky-500 for dark mode */
+}
+
+.dark .sidenote-mark {
+  text-decoration-color: #0ea5e9 !important; /* sky-500 for dark mode */
+}
